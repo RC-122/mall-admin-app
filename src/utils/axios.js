@@ -4,6 +4,7 @@ const instance = axios.create({
     baseURL:"https://mallapi.duyiedu.com/"
 })
 instance.interceptors.request.use((config)=>{
+    console.log(config);
     return config;
 }, (err)=> Promise.reject(err));
 
