@@ -16,7 +16,9 @@
       </template>
     </div>
     <ul class="user-info">
-      <li>欢迎</li>
+      <li>{{$store.state.user.username}}
+        <a-icon type="down" />
+      </li>
       <li>退出</li>
     </ul>
   </div>

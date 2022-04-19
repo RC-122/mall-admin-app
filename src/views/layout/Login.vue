@@ -20,6 +20,7 @@
 </template>
 <script>
 import {login} from "@/api/user"
+import store from "../../store";
 export default {
   data() {
     let emailReg = /^[\w-]+@[\w.-]+.com/;
@@ -64,6 +65,7 @@ export default {
         if (valid) {
             login(this.loginForm).then(res=>{
                 this.$message.success(res);
+                this.$store.dispatch("setUserInfo",res)
                 this.$router.push("/")
             }).catch(err=>{
                 this.$message.error(err);
