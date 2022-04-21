@@ -11,7 +11,7 @@
       <template>
         <a-breadcrumb>
           <a-breadcrumb-item><router-link to="/">首页</router-link></a-breadcrumb-item>
-          <a-breadcrumb-item><router-link :to="$route.path">{{$route.meta.title === "首页" ? "" : $route.meta.title}}</router-link></a-breadcrumb-item>
+          <a-breadcrumb-item><router-link :to="$route.path">{{$route.meta.title === "首页" ? '' : $route.meta.title}}</router-link></a-breadcrumb-item>
         </a-breadcrumb>
       </template>
     </div>
@@ -35,9 +35,7 @@ export default {
       this.$router.push("/login");
     },
   },
-  mounted(){
-    console.log(this.$route);
-  }
+
 };
 </script>
 
