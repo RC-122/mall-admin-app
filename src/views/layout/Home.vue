@@ -2,8 +2,8 @@
   <div class="home">
     <LeftMenu />
     <div :class="{ 'main-app': true, 'menu-unfold': $store.state.collapsed }">
-        <SliderNav />
-        <router-view/>
+      <SliderNav />
+      <router-view />
     </div>
   </div>
 </template>
@@ -13,16 +13,13 @@ import LeftMenu from "./components/leftMenu";
 import SliderNav from "./components/sliderNav";
 
 export default {
-    data() {
-    return {
-
-};
+  data() {
+    return {};
   },
-components:{
+  components: {
     LeftMenu,
     SliderNav,
-}
-  
+  },
 };
 </script>
 

@@ -10,27 +10,49 @@
     <div class="breadcrumb">
       <template>
         <a-breadcrumb>
-          <a-breadcrumb-item>首页</a-breadcrumb-item>
-          <a-breadcrumb-item><a href="#">统计</a></a-breadcrumb-item>
+          <a-breadcrumb-item
+            ><router-link to="/">首页</router-link></a-breadcrumb-item
+          >
+          <a-breadcrumb-item
+            ><router-link :to="$route.path">{{
+              $route.meta.title === "首页" ? "" : $route.meta.title
+            }}</router-link></a-breadcrumb-item
+          >
         </a-breadcrumb>
       </template>
     </div>
     <ul class="user-info">
-      <li>欢迎</li>
-      <li>退出</li>
+      <li>
+        {{ $store.state.user.username ? $store.state.user.username : "欢迎" }}
+        <a-icon type="down" />
+      </li>
+      <li @click="logOutHandle">退出</li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-    methods: {
+  methods: {
     toggleCollapsed() {
       this.$store.dispatch("changeCollapsed");
+    },
+    logOutHandle() {
+      this.$store.dispatch("logOut");
+      this.$router.push("/login");
     },
   },
 };
 </script>
 
-<style>
+<style lang="less" scoped>
+.main-header {
+  position: relative;
+  .user-info {
+    position: absolute;
+    right: 20px;
+    top: 0;
+    z-index: 100;
+  }
+}
 </style>
