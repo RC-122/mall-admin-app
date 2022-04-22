@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Search from "@/components/Search.vue";
+import Search from "@/components/Search";
 import ProductTable from "@/components/ProductTable.vue";
 import { getProducts, delProduct } from "@/api/product";
 import { getCategory } from "@/api/category";
@@ -29,6 +29,7 @@ export default {
         showSizeChanger: true,
         total: 1,
       },
+      searchForm:{},
       categoryList: [],
       categoryObj: {},
     };
@@ -62,7 +63,7 @@ export default {
       const { data } = await getProducts({
         page: this.paginationObj.current,
         size: this.paginationObj.pageSize,
-        ...form,
+        ...this.searchForm,
       });
       this.products = data.data.map((it, i) => {
         return {
@@ -78,8 +79,8 @@ export default {
       this.getProductsData();
     },
     searchHandle(form) {
-      // this.searchForm = form;
-      this.getProductsData(form);
+      this.searchForm = form;
+      this.getProductsData();
     },
   },
 };
