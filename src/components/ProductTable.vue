@@ -5,9 +5,18 @@
     :pagination="pagination"
     @change="changeHandle"
   >
-    <div slot="operation">
-      <a-button>编辑</a-button>
-      <a-button>删除</a-button>
+    <div slot="operation" slot-scope="text, record">
+      <a-button @click="editProductHandle(record)">编辑</a-button>
+      <a-popconfirm
+        title="是否删除该商品？"
+        @confirm="confirm(record)"
+        @cancel="cancel"
+        ok-text="是"
+        cancel-text="否"
+      >
+        <a-icon slot="icon" type="question-circle-o" style="color: red" />
+        <a-button>删除</a-button>
+      </a-popconfirm>
     </div>
   </a-table>
 </template>
@@ -75,9 +84,9 @@ const columns = [
     dataIndex: "operation",
     key: "operation",
     scopedSlots: { customRender: "operation" },
+    width: 200,
   },
 ];
-
 export default {
   data() {
     return {
@@ -85,8 +94,7 @@ export default {
     };
   },
   props: ["data", "pagination"],
-  mounted(){
-  },
+  mounted() {},
   computed: {
     dataTable() {
       return this.data.map((it) => {
@@ -98,6 +106,15 @@ export default {
     },
   },
   methods: {
+    editProductHandle(record) {
+      this.$emit("edit", record)
+    },
+    confirm(record) {
+      this.$emit("confirmHandle", record);
+    },
+    cancel() {
+      this.$message.error("取消删除");
+    },
     changeHandle(page) {
       this.$emit("changPage", page);
     },

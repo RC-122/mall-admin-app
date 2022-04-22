@@ -10,13 +10,20 @@
     <div class="breadcrumb">
       <template>
         <a-breadcrumb>
-          <a-breadcrumb-item><router-link to="/">首页</router-link></a-breadcrumb-item>
-          <a-breadcrumb-item><router-link :to="$route.path">{{$route.meta.title === "首页" ? '' : $route.meta.title}}</router-link></a-breadcrumb-item>
+          <a-breadcrumb-item
+            ><router-link to="/">首页</router-link></a-breadcrumb-item
+          >
+          <a-breadcrumb-item
+            ><router-link :to="$route.path">{{
+              $route.meta.title === "首页" ? "" : $route.meta.title
+            }}</router-link></a-breadcrumb-item
+          >
         </a-breadcrumb>
       </template>
     </div>
     <ul class="user-info">
-      <li>{{$store.state.user.username ? $store.state.user.username : "欢迎"}}
+      <li>
+        {{ $store.state.user.username ? $store.state.user.username : "欢迎" }}
         <a-icon type="down" />
       </li>
       <li @click="logOutHandle">退出</li>
@@ -26,18 +33,26 @@
 
 <script>
 export default {
-    methods: {
+  methods: {
     toggleCollapsed() {
       this.$store.dispatch("changeCollapsed");
     },
-    logOutHandle(){
+    logOutHandle() {
       this.$store.dispatch("logOut");
       this.$router.push("/login");
     },
   },
-
 };
 </script>
 
-<style>
+<style lang="less" scoped>
+.main-header {
+  position: relative;
+  .user-info {
+    position: absolute;
+    right: 20px;
+    top: 0;
+    z-index: 100;
+  }
+}
 </style>

@@ -13,3 +13,7 @@ export function getProducts({page=1,size=10,searchWord,category}){
         }
     })
 }
+
+export function delProduct(id){
+    return instance.delete(`/products/${id}`)
+}

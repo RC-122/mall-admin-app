@@ -8,39 +8,39 @@ import getMenuRouter from "@/utils/permission"
 
 Vue.use(VueRouter)
 
-const asyncRouterMap = [{
-  path: "/product",
-  name: "Product",
-  component: Home,
-  meta: {
-    title: "商品"
-  },
-  children: [{
-    path: "/list",
-    name: "ProductList",
-    component: () => import("@/views/page/ProductList"),
-    meta: {
-      title: "商品列表"
-    }
-  },
-  {
-    path: "/addProduct",
-    name: "AddProduct",
-    component: () => import("@/views/page/AddProduct"),
-    meta: {
-      title: "新增商品"
-    }
-  },
-  {
-    path: "/category",
-    name: "Category",
-    component: () => import("@/views/page/Category"),
-    meta: {
-      title: "商品类目"
-    }
-  },
-  ]
-}]
+// const asyncRouterMap = [{
+//   path: "/product",
+//   name: "Product",
+//   component: Home,
+//   meta: {
+//     title: "商品"
+//   },
+//   children: [{
+//     path: "/list",
+//     name: "ProductList",
+//     component: () => import("@/views/page/ProductList"),
+//     meta: {
+//       title: "商品列表"
+//     }
+//   },
+//   {
+//     path: "/addProduct",
+//     name: "AddProduct",
+//     component: () => import("@/views/page/AddProduct"),
+//     meta: {
+//       title: "新增商品"
+//     }
+//   },
+//   {
+//     path: "/category",
+//     name: "Category",
+//     component: () => import("@/views/page/Category"),
+//     meta: {
+//       title: "商品类目"
+//     }
+//   },
+//   ]
+// }]
 
 const routes = [
   {
@@ -65,7 +65,16 @@ const routes = [
       meta: {
         title: "新增商品"
       }
-    }]
+    },
+    {
+      path: "edit/:id",
+      name: "EditProduct",
+      component: () => import("@/views/page/AddProduct"),
+      meta: {
+        title: "编辑商品"
+      }
+    }
+  ]
   },
   {
     path: "/",

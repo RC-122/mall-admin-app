@@ -1,10 +1,15 @@
 <template>
   <div class="productList-container">
     <Search @sumbit="searchHandle" :categoryList="categoryList" />
+    <a-button class="product-add-btn"
+      ><router-link :to="{ name: 'AddProduct' }">添加商品</router-link></a-button
+    >
     <ProductTable
       :data="products"
       :pagination="paginationObj"
       @changPage="change"
+      @confirmHandle="delHnadle"
+      @edit="editHandle"
     />
   </div>
 </template>
@@ -12,7 +17,7 @@
 <script>
 import Search from "@/components/Search.vue";
 import ProductTable from "@/components/ProductTable.vue";
-import { getProducts } from "@/api/product";
+import { getProducts, delProduct } from "@/api/product";
 import { getCategory } from "@/api/category";
 export default {
   data() {
@@ -34,6 +39,18 @@ export default {
     this.getProductsData();
   },
   methods: {
+    editHandle(record){
+      this.$router.push({
+        name: "EditProduct",
+        params: {
+          id: record.id,
+        },
+      });
+    },
+    async delHnadle(record){
+      await delProduct(record.id);
+      this.getProductsData();
+    },
     async getCategoryList() {
       const { data } = await getCategory();
       this.categoryList = data.data;
@@ -68,5 +85,13 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less" scoped>
+.productList-container{
+  position: relative;
+  .product-add-btn{
+    position: absolute;
+    right: 20px;
+    top:14px;
+  }
+}
 </style>
